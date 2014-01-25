@@ -1,3 +1,8 @@
+cartouche_cartouche:
+    resource: "@CartoucheCartoucheBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 cartouche_front:
     resource: "@CartoucheFrontBundle/Controller/"
     type:     annotation
