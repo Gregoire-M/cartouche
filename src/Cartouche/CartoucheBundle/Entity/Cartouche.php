@@ -3,10 +3,12 @@
 namespace Cartouche\CartoucheBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="cartouche")
+ * @UniqueEntity("url")
  * @ORM\Entity(repositoryClass="Cartouche\CartoucheBundle\Entity\CartoucheRepository")
  */
 class Cartouche
@@ -30,7 +32,8 @@ class Cartouche
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="url", type="string", length=255, unique=true)
+     * @Assert\Regex("/^[a-z]+$/")
      */
     private $url;
 
