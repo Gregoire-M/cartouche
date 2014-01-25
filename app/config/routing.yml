@@ -1,0 +1,5 @@
+cartouche_front:
+    resource: "@CartoucheFrontBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
