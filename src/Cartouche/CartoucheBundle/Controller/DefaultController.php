@@ -23,7 +23,12 @@ class DefaultController extends Controller
         $manager = $this->getDoctrine()->getManager();
 
         $manager->persist($cartouche);
-        $manager->flush();
+        $manager->flush($cartouche);
+
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'Voici la page de gestion de votre cartouche :)'
+        );
 
         return $this->redirect($this->generateUrl('cartouche_show', array('url' => $cartouche->getUrl())));
     }
@@ -36,5 +41,22 @@ class DefaultController extends Controller
     public function showAction(Cartouche $cartouche)
     {
         return array('cartouche' => $cartouche);
+    }
+
+    /**
+     * @Route("/change/{url}", name="cartouche_change")
+     * @Method("GET")
+     */
+    public function changeAction(Cartouche $cartouche)
+    {
+        $cartouche->change();
+        $this->getDoctrine()->getManager()->flush($cartouche);
+
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'Changement de cartouche enregistré !'
+        );
+
+        return $this->redirect($this->generateUrl('cartouche_show', array('url' => $cartouche->getUrl())));
     }
 }

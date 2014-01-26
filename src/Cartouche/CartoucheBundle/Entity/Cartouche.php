@@ -215,7 +215,6 @@ class Cartouche
         return $this;
     }
 
-
     /**
      * @return \DateTime 
      */
@@ -230,5 +229,15 @@ class Cartouche
         $nextDate->add(new \DateInterval(sprintf('P%dD', $this->duration)));
 
         return $this->setNextChangeDate($nextDate);
+    }
+
+    public function change(\DateTime $changeDate = null)
+    {
+        if ($changeDate === null) {
+            $changeDate = new \DateTime();
+        }
+
+        return $this->setLastChangeDate($changeDate)
+            ->computeNextChangeDate();
     }
 }

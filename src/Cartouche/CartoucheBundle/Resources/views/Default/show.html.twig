@@ -15,7 +15,7 @@
     </dl>
 
     <p class="text-center">
-        <a href="#" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
+        <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
     </p>
 
 {% endblock %}
