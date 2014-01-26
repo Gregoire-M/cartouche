@@ -2,9 +2,7 @@
 
 namespace Cartouche\CartoucheBundle\Controller;
 
-use Cartouche\CartoucheBundle\Entity\Cartouche;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\Util\SecureRandom;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -21,18 +19,19 @@ class DefaultController extends Controller
      */
     public function newAction()
     {
+        $cartouche = $this->get('cartouche.factory')->create();
+        $manager = $this->getDoctrine()->getManager();
 
-		$cartouche = new Cartouche();
+        $manager->persist($cartouche);
+        $manager->flush();
 
-		die($this->generateCartoucheUrl());
+        die('ok');
 
         return array();
     }
 
-    private function generateCartoucheUrl()
+    public function showAction()
     {
-		$generator = new SecureRandom();
-
-		return bin2hex($generator->nextBytes(4));
+        
     }
 }

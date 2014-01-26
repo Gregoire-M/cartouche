@@ -4,17 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
-    <parameters>
-        <parameter key="cartouche_cartouche.example.class">Cartouche\CartoucheBundle\Example</parameter>
-    </parameters>
-
     <services>
-        <service id="cartouche_cartouche.example" class="%cartouche_cartouche.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="cartouche.factory" class="Cartouche\CartoucheBundle\Factory\CartoucheFactory">
+            <argument type="service" id="security.secure_random" />
         </service>
     </services>
-    -->
+    
 </container>
