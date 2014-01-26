@@ -3,7 +3,9 @@
 namespace Cartouche\CartoucheBundle\Controller;
 
 use Cartouche\CartoucheBundle\Entity\Cartouche;
+use Cartouche\CartoucheBundle\Form\CartoucheType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -49,7 +51,7 @@ class DefaultController extends Controller
      */
     public function changeAction(Cartouche $cartouche)
     {
-        $cartouche->change();
+        $cartouche->setLastChangeDate(new \DateTime());
         $this->getDoctrine()->getManager()->flush($cartouche);
 
         $this->get('session')->getFlashBag()->add(
@@ -58,5 +60,35 @@ class DefaultController extends Controller
         );
 
         return $this->redirect($this->generateUrl('cartouche_show', array('url' => $cartouche->getUrl())));
+    }
+
+    /**
+     * @Route("/edit/{url}", name="cartouche_edit")
+     * @Method({"GET", "POST"})
+     * @Template()
+     */
+    public function editAction(Cartouche $cartouche, Request $request)
+    {
+        $form = $this->createForm(new CartoucheType(), $cartouche);
+
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+
+            if ($form->isValid()) {
+                $this->getDoctrine()->getManager()->flush($cartouche);
+
+                $this->get('session')->getFlashBag()->add(
+                    'success',
+                    'Paramètres enregistrés !'
+                );
+
+                return $this->redirect($this->generateUrl('cartouche_show', array('url' => $cartouche->getUrl())));
+            }
+        }
+
+        return array(
+            'form' => $form->createView(),
+            'cartouche' => $cartouche
+        );
     }
 }

@@ -33,7 +33,7 @@ class Cartouche
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255, unique=true)
-     * @Assert\Regex("/^[a-z]+$/")
+     * @Assert\Regex("/^[a-z0-9]+$/")
      */
     private $url;
 
@@ -173,6 +173,7 @@ class Cartouche
     public function setLastChangeDate($lastChangeDate)
     {
         $this->lastChangeDate = $lastChangeDate;
+        $this->computeNextChangeDate();
 
         return $this;
     }
@@ -192,6 +193,7 @@ class Cartouche
     public function setDuration($duration)
     {
         $this->duration = $duration;
+        $this->computeNextChangeDate();
 
         return $this;
     }
@@ -223,21 +225,11 @@ class Cartouche
         return $this->nextChangeDate;
     }
 
-    public function computeNextChangeDate()
+    private function computeNextChangeDate()
     {
         $nextDate = clone $this->lastChangeDate;
         $nextDate->add(new \DateInterval(sprintf('P%dD', $this->duration)));
 
         return $this->setNextChangeDate($nextDate);
-    }
-
-    public function change(\DateTime $changeDate = null)
-    {
-        if ($changeDate === null) {
-            $changeDate = new \DateTime();
-        }
-
-        return $this->setLastChangeDate($changeDate)
-            ->computeNextChangeDate();
     }
 }

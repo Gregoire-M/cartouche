@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_rest(form) }}
+
+    <div class="btn-group">
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <a href="{{ path('cartouche_show', {'url': cartouche.url}) }}" class="btn btn-default">Retour</a>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
