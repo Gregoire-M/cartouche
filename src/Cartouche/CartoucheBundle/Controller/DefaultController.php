@@ -2,6 +2,7 @@
 
 namespace Cartouche\CartoucheBundle\Controller;
 
+use Cartouche\CartoucheBundle\Entity\Cartouche;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,7 +16,6 @@ class DefaultController extends Controller
     /**
      * @Route("/new", name="cartouche_new")
      * @Method("POST")
-     * @Template()
      */
     public function newAction()
     {
@@ -25,13 +25,16 @@ class DefaultController extends Controller
         $manager->persist($cartouche);
         $manager->flush();
 
-        die('ok');
-
-        return array();
+        return $this->redirect($this->generateUrl('cartouche_show', array('url' => $cartouche->getUrl())));
     }
 
-    public function showAction()
+    /**
+     * @Route("/{url}", name="cartouche_show")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showAction(Cartouche $cartouche)
     {
-        
+        return array('cartouche' => $cartouche);
     }
 }

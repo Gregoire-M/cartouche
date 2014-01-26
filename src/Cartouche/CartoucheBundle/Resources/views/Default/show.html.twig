@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Informations concernant votre cartouche "{{ cartouche.name }}"</h1>
+
+    <dl class="dl-horizontal">
+        <dt>Dernier remplacement</dt>
+        <dd>{{ cartouche.lastChangeDate|date('d/m/Y') }}</dd>
+        
+        <dt>Prochain remplacement</dt>
+        <dd>{{ cartouche.nextChangeDate|date('d/m/Y') }}</dd>
+        
+        <dt>Notification par email</dt>
+        <dd>{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</dd>
+    </dl>
+
+    <p class="text-center">
+        <a href="#" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
+    </p>
+
+{% endblock %}

@@ -67,15 +67,22 @@ class Cartouche
      */
     private $duration = 28;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="nextChangeDate", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $nextChangeDate;
+
     public function __construct()
     {
         $this->lastChangeDate = new \DateTime();
+        $this->computeNextChangeDate();
     }
 
 
     /**
-     * Get id
-     *
      * @return integer 
      */
     public function getId()
@@ -84,8 +91,6 @@ class Cartouche
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      * @return Cartouche
      */
@@ -97,8 +102,6 @@ class Cartouche
     }
 
     /**
-     * Get name
-     *
      * @return string 
      */
     public function getName()
@@ -107,8 +110,6 @@ class Cartouche
     }
 
     /**
-     * Set url
-     *
      * @param string $url
      * @return Cartouche
      */
@@ -120,8 +121,6 @@ class Cartouche
     }
 
     /**
-     * Get url
-     *
      * @return string 
      */
     public function getUrl()
@@ -130,8 +129,6 @@ class Cartouche
     }
 
     /**
-     * Set isNotificationEnabled
-     *
      * @param boolean $isNotificationEnabled
      * @return Cartouche
      */
@@ -143,8 +140,6 @@ class Cartouche
     }
 
     /**
-     * Get isNotificationEnabled
-     *
      * @return boolean 
      */
     public function getIsNotificationEnabled()
@@ -153,8 +148,6 @@ class Cartouche
     }
 
     /**
-     * Set email
-     *
      * @param string $email
      * @return Cartouche
      */
@@ -166,8 +159,6 @@ class Cartouche
     }
 
     /**
-     * Get email
-     *
      * @return string 
      */
     public function getEmail()
@@ -176,8 +167,6 @@ class Cartouche
     }
 
     /**
-     * Set lastChangeDate
-     *
      * @param \DateTime $lastChangeDate
      * @return Cartouche
      */
@@ -189,8 +178,6 @@ class Cartouche
     }
 
     /**
-     * Get lastChangeDate
-     *
      * @return \DateTime 
      */
     public function getLastChangeDate()
@@ -199,8 +186,6 @@ class Cartouche
     }
 
     /**
-     * Set duration
-     *
      * @param integer $duration
      * @return Cartouche
      */
@@ -212,12 +197,38 @@ class Cartouche
     }
 
     /**
-     * Get duration
-     *
      * @return integer 
      */
     public function getDuration()
     {
         return $this->duration;
+    }
+
+    /**
+     * @param \DateTime $nextChangeDate
+     * @return Cartouche
+     */
+    public function setNextChangeDate($nextChangeDate)
+    {
+        $this->nextChangeDate = $nextChangeDate;
+
+        return $this;
+    }
+
+
+    /**
+     * @return \DateTime 
+     */
+    public function getNextChangeDate()
+    {
+        return $this->nextChangeDate;
+    }
+
+    public function computeNextChangeDate()
+    {
+        $nextDate = clone $this->lastChangeDate;
+        $nextDate->add(new \DateInterval(sprintf('P%dD', $this->duration)));
+
+        return $this->setNextChangeDate($nextDate);
     }
 }
