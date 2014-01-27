@@ -3,13 +3,19 @@
 {% block body %}
     <h1>Informations concernant votre cartouche "{{ cartouche.name }}"</h1>
 
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.usure }}%;">
+            <span class="sr-only">{{ cartouche.usure }}%</span>
+        </div>
+    </div>
+
     <dl class="dl-horizontal">
         <dt>Dernier remplacement</dt>
         <dd>{{ cartouche.lastChangeDate|date('d/m/Y') }}</dd>
-        
+
         <dt>Prochain remplacement</dt>
         <dd>{{ cartouche.nextChangeDate|date('d/m/Y') }}</dd>
-        
+
         <dt>Notification par email</dt>
         <dd>{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</dd>
     </dl>

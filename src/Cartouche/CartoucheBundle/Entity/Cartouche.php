@@ -232,4 +232,14 @@ class Cartouche
 
         return $this->setNextChangeDate($nextDate);
     }
+
+    public function getAge()
+    {
+        return $this->getLastChangeDate()->diff(new \DateTime())->format('%a');
+    }
+
+    public function getUsure()
+    {
+        return round(100 * $this->getAge() / $this->getDuration());
+    }
 }
