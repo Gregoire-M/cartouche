@@ -14,7 +14,7 @@ class CartoucheType extends AbstractType
             ->add('name', null, array('label' => 'Nom de ma cartouche'))
             ->add('url', null, array('label' => 'URL de ma cartouche'))
             ->add(
-                'isNotificationEnabled'
+                'notificationEnabled'
                 , null,
                 array(
                     'label' => 'Recevoir une notification par mail quand je dois changer ma cartouche',

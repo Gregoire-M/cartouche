@@ -40,9 +40,9 @@ class Cartouche
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isNotificationEnabled", type="boolean")
+     * @ORM\Column(name="notificationEnabled", type="boolean")
      */
-    private $isNotificationEnabled = false;
+    private $notificationEnabled = false;
 
     /**
      * @var string
@@ -83,7 +83,7 @@ class Cartouche
 
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -102,7 +102,7 @@ class Cartouche
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -121,7 +121,7 @@ class Cartouche
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -129,22 +129,22 @@ class Cartouche
     }
 
     /**
-     * @param boolean $isNotificationEnabled
+     * @param boolean $notificationEnabled
      * @return Cartouche
      */
-    public function setIsNotificationEnabled($isNotificationEnabled)
+    public function setNotificationEnabled($notificationEnabled)
     {
-        $this->isNotificationEnabled = $isNotificationEnabled;
+        $this->notificationEnabled = $notificationEnabled;
 
         return $this;
     }
 
     /**
-     * @return boolean 
+     * @return boolean
      */
-    public function getIsNotificationEnabled()
+    public function isNotificationEnabled()
     {
-        return $this->isNotificationEnabled;
+        return $this->notificationEnabled;
     }
 
     /**
@@ -159,7 +159,7 @@ class Cartouche
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -179,7 +179,7 @@ class Cartouche
     }
 
     /**
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getLastChangeDate()
     {
@@ -199,7 +199,7 @@ class Cartouche
     }
 
     /**
-     * @return integer 
+     * @return integer
      */
     public function getDuration()
     {
@@ -218,7 +218,7 @@ class Cartouche
     }
 
     /**
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getNextChangeDate()
     {
