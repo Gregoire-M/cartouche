@@ -5,11 +5,13 @@ namespace Cartouche\CartoucheBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * @ORM\Table(name="cartouche")
- * @UniqueEntity("url")
  * @ORM\Entity(repositoryClass="Cartouche\CartoucheBundle\Entity\CartoucheRepository")
+ * @UniqueEntity("url")
+ * @Assert\Callback(methods={"isNotificationParameterValid"})
  */
 class Cartouche
 {
@@ -33,6 +35,7 @@ class Cartouche
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255, unique=true)
+     * @Assert\Length(min = "4")
      * @Assert\Regex("/^[a-z0-9]+$/")
      */
     private $url;
@@ -241,5 +244,12 @@ class Cartouche
     public function getUsure()
     {
         return round(100 * $this->getAge() / $this->getDuration());
+    }
+
+    public function isNotificationParameterValid(ExecutionContextInterface $context)
+    {
+        if ($this->isNotificationEnabled() && $this->getEmail() == null) {
+            $context->addViolationAt('email', 'Vous devez définir un email pour recevoir les notifications');
+        }
     }
 }
