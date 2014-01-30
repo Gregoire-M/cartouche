@@ -11,8 +11,8 @@ class CartoucheType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'Nom de ma cartouche'))
-            ->add('url', null, array('label' => 'URL de ma cartouche'))
+            ->add('name', null, array('label' => 'Nom de ma carafe'))
+            ->add('url', null, array('label' => 'URL de ma carafe'))
             ->add(
                 'notificationEnabled'
                 , null,

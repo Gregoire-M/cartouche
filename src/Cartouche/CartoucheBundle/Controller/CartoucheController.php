@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * @Route("/cartouche")
  */
-class DefaultController extends Controller
+class CartoucheController extends Controller
 {
     /**
      * @Route("/new", name="cartouche_new")
