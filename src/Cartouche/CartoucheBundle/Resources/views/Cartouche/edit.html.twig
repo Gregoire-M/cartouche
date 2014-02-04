@@ -1,14 +1,57 @@
 {% extends "::base.html.twig" %}
 
+{% form_theme form _self %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form, null, {'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+            <div class="col-sm-9">
+                {{ form_errors(form) }}
+                {{ form_widget(form, {'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'role': 'form', 'class': 'form-horizontal'} }) }}
     {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                {{ form_widget(form.notificationEnabled) }}
+                {{ form_label(form.notificationEnabled) }}
+                {{ form_errors(form.notificationEnabled) }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_row(form.url) }}
+
+    {{ form_row(form.email) }}
+
+    {{ form_row(form.lastChangeDate) }}
+
+    <div class="form-group">
+        {{ form_label(form.duration, null, {'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+        <div class="col-xs-1">
+            {{ form_errors(form.duration) }}
+            {{ form_widget(form.duration, {'attr': {'class': 'form-control'} }) }}
+        </div>
+    </div>
 
     {{ form_rest(form) }}
 
-    <div class="btn-group">
-        <button type="submit" class="btn btn-primary">Valider</button>
-        <a href="{{ path('cartouche_show', {'url': cartouche.url}) }}" class="btn btn-default">Retour</a>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-primary">Valider</button>
+            <a href="{{ path('cartouche_show', {'url': cartouche.url}) }}" class="btn btn-default">Retour</a>
+        </div>
     </div>
 
     {{ form_end(form) }}
