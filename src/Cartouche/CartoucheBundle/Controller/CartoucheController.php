@@ -51,7 +51,8 @@ class CartoucheController extends Controller
      */
     public function changeAction(Cartouche $cartouche)
     {
-        $cartouche->setLastChangeDate(new \DateTime());
+        $cartouche->setLastChangeDate(new \DateTime())
+            ->setNotificationSent(false);
         $this->getDoctrine()->getManager()->flush($cartouche);
 
         $this->get('session')->getFlashBag()->add(

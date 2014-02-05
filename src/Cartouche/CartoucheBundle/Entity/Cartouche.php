@@ -78,6 +78,13 @@ class Cartouche
      */
     private $nextChangeDate;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="notificationSent", type="boolean")
+     */
+    private $notificationSent = false;
+
     public function __construct()
     {
         $this->lastChangeDate = new \DateTime();
@@ -226,6 +233,25 @@ class Cartouche
     public function getNextChangeDate()
     {
         return $this->nextChangeDate;
+    }
+
+    /**
+     * @param boolean $notificationSent
+     * @return Cartouche
+     */
+    public function setNotificationSent($notificationSent)
+    {
+        $this->notificationSent = $notificationSent;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNotificationSent()
+    {
+        return $this->notificationSent;
     }
 
     private function computeNextChangeDate()
