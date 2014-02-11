@@ -1,29 +1,36 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <h1>Informations concernant votre cartouche "{{ cartouche.name }}"</h1>
 
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.usure }}%;">
-            <span class="sr-only">{{ cartouche.usure }}%</span>
-        </div>
+    <div class="pull-right">
+        <a href="{{ path('cartouche_edit', {'url': cartouche.url}) }}" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Paramètres</a>
     </div>
 
-    <dl class="dl-horizontal">
-        <dt>Dernier remplacement</dt>
-        <dd>{{ cartouche.lastChangeDate|date('d/m/Y') }}</dd>
+    <div class="jumbotron">
+        <h1>Votre carafe "{{ cartouche.name }}"</h1>
 
-        <dt>Prochain remplacement</dt>
-        <dd>{{ cartouche.nextChangeDate|date('d/m/Y') }}</dd>
+        <div class="lead">
+            <div class="row">
+                <div class="col-md-6"><strong>Dernier remplacement</strong></div>
+                <div class="col-md-6">{{ cartouche.lastChangeDate|date('d/m/Y') }}</div>
 
-        <dt>Notification par email</dt>
-        <dd>{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</dd>
-    </dl>
+                <div class="col-md-6"><strong>Prochain remplacement</strong></div>
+                <div class="col-md-6">{{ cartouche.nextChangeDate|date('d/m/Y') }}</div>
 
-    <a href="{{ path('cartouche_edit', {'url': cartouche.url}) }}" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Paramètres</a>
+                <div class="col-md-6"><strong>Notification par email</strong></div>
+                <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</div>
+            </div>
 
-    <p class="text-center">
-        <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
-    </p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.usure }}%;">
+                    <span class="sr-only">{{ cartouche.usure }}%</span>
+                </div>
+            </div>
+
+            <p class="text-center">
+                <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
+            </p>
+        </div>
+    </div>
 
 {% endblock %}
