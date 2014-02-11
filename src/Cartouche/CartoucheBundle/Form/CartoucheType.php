@@ -33,7 +33,7 @@ class CartoucheType extends AbstractType
                     'label'  => 'Dernier changement de cartouche',
                 )
             )
-            ->add('duration', null, array('label' => 'Durée de vie de la cartouche (en jours)'))
+            ->add('duration', null, array('label' => 'Durée de la cartouche (en jours)'))
         ;
     }
 
