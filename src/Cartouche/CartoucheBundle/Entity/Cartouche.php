@@ -29,7 +29,7 @@ class Cartouche
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name = 'Ma cartouche Brita';
+    private $name = 'Ma carafe Brita';
 
     /**
      * @var string

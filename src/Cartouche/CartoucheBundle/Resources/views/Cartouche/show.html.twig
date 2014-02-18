@@ -10,7 +10,7 @@
         <h1>Votre carafe "{{ cartouche.name }}"</h1>
 
         <div class="lead">
-            <div class="row">
+            <div class="row top_buffer">
                 <div class="col-md-6"><strong>Dernier remplacement</strong></div>
                 <div class="col-md-6">{{ cartouche.lastChangeDate|date('d/m/Y') }}</div>
 
@@ -21,13 +21,13 @@
                 <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</div>
             </div>
 
-            <div class="progress">
+            <div class="progress top_buffer">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.usure }}%;">
                     <span class="sr-only">{{ cartouche.usure }}%</span>
                 </div>
             </div>
 
-            <p class="text-center">
+            <p class="text-center top_buffer">
                 <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
             </p>
         </div>
