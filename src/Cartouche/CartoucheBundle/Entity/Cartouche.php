@@ -85,6 +85,8 @@ class Cartouche
      */
     private $notificationSent = false;
 
+    private $wear;
+
     public function __construct()
     {
         $this->lastChangeDate = new \DateTime();
@@ -267,9 +269,13 @@ class Cartouche
         return $this->getLastChangeDate()->diff(new \DateTime())->format('%a');
     }
 
-    public function getUsure()
+    public function getWear()
     {
-        return round(100 * $this->getAge() / $this->getDuration());
+        if (!isset($this->wear)) {
+            $this->wear = round(100 * $this->getAge() / $this->getDuration());
+        }
+        
+        return $this->wear;
     }
 
     public function isNotificationParameterValid(ExecutionContextInterface $context)

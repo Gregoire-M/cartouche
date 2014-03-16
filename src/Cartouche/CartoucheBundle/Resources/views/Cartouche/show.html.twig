@@ -19,13 +19,18 @@
 
                 <div class="col-md-6"><strong>Notification par email</strong></div>
                 <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</div>
-            </div>
 
-            <div class="progress top_buffer">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.usure }}%;">
-                    <span class="sr-only">{{ cartouche.usure }}%</span>
+                <div class="col-md-6"><strong>Niveau d'usure</strong></div>
+                <div class="col-md-6">
+                    <div class="progress">
+                        <div class="progress-bar{{ cartouche.wear > 80 ? (cartouche.wear > 100 ? ' progress-bar-danger' : ' progress-bar-warning') : '' }}" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.wear > 100 ? 100 : cartouche.wear }}%;">
+                            {{ cartouche.wear }}%
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            
 
             <p class="text-center top_buffer">
                 <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
