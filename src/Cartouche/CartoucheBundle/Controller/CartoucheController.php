@@ -29,7 +29,7 @@ class CartoucheController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            'Voici la page de gestion de votre cartouche :)'
+            'Voici la page de gestion de votre cartouche. Pensez à l\'ajouter à vos favoris :)'
         );
 
         return $this->redirect($this->generateUrl('cartouche_show', array('url' => $cartouche->getUrl())));

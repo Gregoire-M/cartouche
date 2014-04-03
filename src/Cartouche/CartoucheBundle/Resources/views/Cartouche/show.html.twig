@@ -30,12 +30,18 @@
                 </div>
             </div>
 
-            
-
             <p class="text-center top_buffer">
-                <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" class="btn btn-primary btn-lg">J'ai changé ma cartouche aujourd'hui</a>
+                <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" id="mark_as_changed" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="bottom" title="Pensez à mettre ce lien dans vos favoris pour gagner du temps !">J'ai changé ma cartouche aujourd'hui</a>
             </p>
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('#mark_as_changed').tooltip();
+    </script>
 {% endblock %}
