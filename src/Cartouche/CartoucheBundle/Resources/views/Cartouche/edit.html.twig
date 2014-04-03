@@ -1,0 +1,79 @@
+{% extends "::base.html.twig" %}
+
+{% form_theme form _self %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form, null, {'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+            <div class="col-sm-3">
+                {{ form_errors(form) }}
+                {{ form_widget(form, {'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+
+{% block body %}
+    <h1>Paramétrage de ma carafe</h1>
+
+    <div class="well well-lg">
+        {{ form_start(form, {'attr': {'role': 'form', 'class': 'form-horizontal'} }) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+
+        <div class="form-group">
+            {{ form_label(form.url, null, {'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+            <div class="col-sm-5">
+                {{ form_errors(form.url) }}
+                <div class="input-group">
+                    <span class="input-group-addon">{{ url('cartouche_show', {'url': '__'})|replace({'__': ''}) }}</span>
+                    {{ form_widget(form.url, {'attr': {'class': 'form-control'} }) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <div class="checkbox">
+                    {{ form_widget(form.notificationEnabled) }}
+                    {{ form_label(form.notificationEnabled) }}
+                    {{ form_errors(form.notificationEnabled) }}
+                </div>
+            </div>
+        </div>
+
+        {{ form_row(form.email) }}
+
+        {{ form_row(form.lastChangeDate) }}
+
+        <div class="form-group">
+            {{ form_label(form.duration, null, {'label_attr': {'class': 'col-sm-3 control-label'} }) }}
+            <div class="col-xs-1">
+                {{ form_errors(form.duration) }}
+                {{ form_widget(form.duration, {'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary">Valider</button>
+                <a href="{{ path('cartouche_show', {'url': cartouche.url}) }}" class="btn btn-default">Retour</a>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        datize($('#cartouche_cartouchebundle_cartouche_lastChangeDate'));
+    </script>
+{% endblock %}

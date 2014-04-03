@@ -1,0 +1,47 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div class="pull-right">
+        <a href="{{ path('cartouche_edit', {'url': cartouche.url}) }}" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Paramètres</a>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Votre carafe "{{ cartouche.name }}"</h1>
+
+        <div class="lead">
+            <div class="row top_buffer">
+                <div class="col-md-6"><strong>Dernier remplacement</strong></div>
+                <div class="col-md-6">{{ cartouche.lastChangeDate|date('d/m/Y') }}</div>
+
+                <div class="col-md-6"><strong>Prochain remplacement</strong></div>
+                <div class="col-md-6">{{ cartouche.nextChangeDate|date('d/m/Y') }}</div>
+
+                <div class="col-md-6"><strong>Notification par email</strong></div>
+                <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</div>
+
+                <div class="col-md-6"><strong>Niveau d'usure</strong></div>
+                <div class="col-md-6">
+                    <div class="progress">
+                        <div class="progress-bar{{ cartouche.wear > 80 ? (cartouche.wear > 100 ? ' progress-bar-danger' : ' progress-bar-warning') : '' }}" role="progressbar" aria-valuenow="{{ cartouche.age }}" aria-valuemin="0" aria-valuemax="{{ cartouche.duration }}" style="width: {{ cartouche.wear > 100 ? 100 : cartouche.wear }}%;">
+                            {{ cartouche.wear }}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center top_buffer">
+                <a href="{{ path('cartouche_change', {'url': cartouche.url}) }}" id="mark_as_changed" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="bottom" title="Pensez à mettre ce lien dans vos favoris pour gagner du temps !">J'ai changé ma cartouche aujourd'hui</a>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('#mark_as_changed').tooltip();
+    </script>
+{% endblock %}
