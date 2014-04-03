@@ -35,7 +35,8 @@ class SendNotificationCommand extends ContainerAwareCommand
                     $twigEnvironment->render(
                         'CartoucheCartoucheBundle:Cartouche:mail.html.twig',
                         array('cartouche' => $cartouche)
-                    )
+                    ),
+                    'text/html'
                 );
 
             if ($mailer->send($message)) {
