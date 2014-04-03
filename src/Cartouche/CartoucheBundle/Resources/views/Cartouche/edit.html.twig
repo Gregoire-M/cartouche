@@ -69,3 +69,11 @@
         {{ form_end(form) }}
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        datize($('#cartouche_cartouchebundle_cartouche_lastChangeDate'));
+    </script>
+{% endblock %}
