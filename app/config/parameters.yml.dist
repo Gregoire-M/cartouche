@@ -13,3 +13,6 @@ parameters:
 
     locale:            fr
     secret:            ThisTokenIsReallyNotSecretChangeIt
+
+    router.request_context.host: estcequejedoischangermacartouche.fr
+    router.request_context.scheme: http
