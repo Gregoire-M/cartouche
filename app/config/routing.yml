@@ -11,3 +11,12 @@ homepage:
         maxAge: 604800
         sharedMaxAge: 604800
         private: false
+
+contact:
+    pattern: /contact
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'CartoucheFrontBundle:Front:contact.html.twig'
+        maxAge: 604800
+        sharedMaxAge: 604800
+        private: false
