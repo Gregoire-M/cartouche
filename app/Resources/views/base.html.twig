@@ -13,7 +13,7 @@
     <body>
         <div class="container">
             {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="alert alert-success alert-dismissable">
+                <div class="flash-message alert alert-success alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>{{ flashMessage }}</strong>
                 </div>
