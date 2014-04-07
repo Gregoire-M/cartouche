@@ -18,7 +18,7 @@
                 <div class="col-md-6">{{ cartouche.nextChangeDate|date('d/m/Y') }}</div>
 
                 <div class="col-md-6"><strong>Notification par email</strong></div>
-                <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : '<abbr data-toggle="tooltip" title="Rendez vous dans les paramètres pour activer les notifications">Désactivée</abbr>' }}</div>
+                <div class="col-md-6{% if not cartouche.isNotificationEnabled %} text-danger{% endif %}">{{ cartouche.isNotificationEnabled ? 'Activée' : '<abbr data-toggle="tooltip" title="Rendez vous dans les paramètres pour activer les notifications">Désactivée</abbr>' }}</div>
 
                 <div class="col-md-6"><strong>Niveau d'usure</strong></div>
                 <div class="col-md-6">
@@ -41,31 +41,9 @@
 
         <p>
             Vous pouvez en acheter ici par exemple (avec ces liens sponsorisés amazon, vous participez au financement de ce merveilleux service) :
-            <ul>
-                <li>
-                    <a href="http://www.amazon.fr/gp/product/B001T9N51M/ref=as_li_tf_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B001T9N51M&linkCode=as2&tag=estcequejedoi-21">Brita Lot de 12 Cartouches Maxtra pour Carafes Filtrantes</a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=estcequejedoi-21&l=as2&o=8&a=B001T9N51M" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-                </li>
-                <li>
-                    <a href="http://www.amazon.fr/gp/product/B001FWYYAY/ref=as_li_tf_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B001FWYYAY&linkCode=as2&tag=estcequejedoi-21">Brita 101929 Pack de 5 Cartouches Maxtra + 1 offerte</a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=estcequejedoi-21&l=as2&o=8&a=B001FWYYAY" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-                </li>
-                <li>
-                    <a href="http://www.amazon.fr/gp/product/B007RELSXA/ref=as_li_tf_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B007RELSXA&linkCode=as2&tag=estcequejedoi-21">A001 - Brita Maxtra compatible pack de 6 cartouches marque Aqua Optima - Evolve - Capacite 150 litres.</a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=estcequejedoi-21&l=as2&o=8&a=B007RELSXA" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-                </li>
-                <li>
-                    <a href="http://www.amazon.fr/gp/product/B001T9N60M/ref=as_li_tf_tl?ie=UTF8&camp=1642&creative=6746&creativeASIN=B001T9N60M&linkCode=as2&tag=estcequejedoi-21">BRITA Classic Water Filter Cartridge 8 Pack</a><img src="http://ir-fr.amazon-adsystem.com/e/ir?t=estcequejedoi-21&l=as2&o=8&a=B001T9N60M" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-                </li>
-            </ul>
+            {{ include('CartoucheCartoucheBundle:Cartouche:links.html.twig') }}
         </p>
 
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script type="text/javascript">
-        $('#mark_as_changed').tooltip();
-        $('abbr[data-toggle="tooltip"]').tooltip();
-    </script>
 {% endblock %}
