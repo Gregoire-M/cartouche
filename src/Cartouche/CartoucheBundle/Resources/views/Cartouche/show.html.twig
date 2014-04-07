@@ -47,12 +47,3 @@
     </div>
 
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script type="text/javascript">
-        $('#mark_as_changed').tooltip();
-        $('abbr[data-toggle="tooltip"]').tooltip();
-    </script>
-{% endblock %}
