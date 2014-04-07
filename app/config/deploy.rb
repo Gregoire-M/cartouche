@@ -19,7 +19,6 @@ after "deploy", "deploy:cleanup"
 set :shared_files,      ["app/config/parameters.yml"]
 set :shared_children,   [app_path + "/logs"]
 set :use_composer, true
-set :update_vendors, true
 set :dump_assetic_assets, true
 
 set :writable_dirs,       ["app/cache"]
