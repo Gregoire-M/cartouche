@@ -18,7 +18,7 @@
                 <div class="col-md-6">{{ cartouche.nextChangeDate|date('d/m/Y') }}</div>
 
                 <div class="col-md-6"><strong>Notification par email</strong></div>
-                <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : 'Désactivée' }}</div>
+                <div class="col-md-6">{{ cartouche.isNotificationEnabled ? 'Activée' : '<abbr data-toggle="tooltip" title="Rendez vous dans les paramètres pour activer les notifications">Désactivée</abbr>' }}</div>
 
                 <div class="col-md-6"><strong>Niveau d'usure</strong></div>
                 <div class="col-md-6">
@@ -66,5 +66,6 @@
 
     <script type="text/javascript">
         $('#mark_as_changed').tooltip();
+        $('abbr[data-toggle="tooltip"]').tooltip();
     </script>
 {% endblock %}
