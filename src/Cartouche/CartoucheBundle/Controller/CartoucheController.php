@@ -76,6 +76,7 @@ class CartoucheController extends Controller
             $form->submit($request);
 
             if ($form->isValid()) {
+                $cartouche->setNotificationSent(false);
                 $this->getDoctrine()->getManager()->flush($cartouche);
 
                 $this->get('session')->getFlashBag()->add(
