@@ -13,7 +13,7 @@ role :web,        domain                         # Your HTTP server, Apache/etc
 role :app,        domain                         # This may be the same as your `Web` server
 role :db,         domain, :primary => true       # This is where Symfony2 migrations will run
 
-set  :keep_releases,  5
+set  :keep_releases,  3
 after "deploy", "deploy:cleanup"
 
 set :shared_files,      ["app/config/parameters.yml"]
