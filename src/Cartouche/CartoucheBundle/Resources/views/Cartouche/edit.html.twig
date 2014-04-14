@@ -30,7 +30,7 @@
                 {{ form_errors(form.url) }}
                 <div class="input-group">
                     <span class="input-group-addon">{{ url('cartouche_show', {'url': '__'})|replace({'__': ''}) }}</span>
-                    {{ form_widget(form.url, {'attr': {'class': 'form-control'} }) }}
+                    {{ form_widget(form.url, {'attr': {'class': 'form-control', 'min-width': '85px'} }) }}
                 </div>
             </div>
         </div>

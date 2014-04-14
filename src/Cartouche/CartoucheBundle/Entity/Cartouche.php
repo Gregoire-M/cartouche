@@ -11,7 +11,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @ORM\Table(name="cartouche")
  * @ORM\Entity(repositoryClass="Cartouche\CartoucheBundle\Entity\CartoucheRepository")
  * @UniqueEntity("url")
- * @Assert\Callback(methods={"isNotificationParameterValid"})
+ * @Assert\Callback(methods={"isNotificationParameterValid", "isLastChangeDateValid"})
  */
 class Cartouche
 {
@@ -274,7 +274,7 @@ class Cartouche
         if (!isset($this->wear)) {
             $this->wear = round(100 * $this->getAge() / $this->getDuration());
         }
-        
+
         return $this->wear;
     }
 
@@ -282,6 +282,13 @@ class Cartouche
     {
         if ($this->isNotificationEnabled() && $this->getEmail() == null) {
             $context->addViolationAt('email', 'Vous devez définir un email pour recevoir les notifications');
+        }
+    }
+
+    public function isLastChangeDateValid(ExecutionContextInterface $context)
+    {
+        if ($this->getLastChangeDate() > new \DateTime()) {
+            $context->addViolationAt('lastChangeDate', 'Vous devez saisir une date dans le passé');
         }
     }
 }
