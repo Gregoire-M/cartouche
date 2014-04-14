@@ -7,10 +7,12 @@
     </div>
 
     <div class="jumbotron">
-        <h1>Votre carafe "{{ cartouche.name }}"</h1>
+        <h1>{{ answer(cartouche.wear) }}</h1>
 
         <div class="lead">
             <div class="row top_buffer">
+                <h2>Votre carafe "{{ cartouche.name }}"</h2>
+
                 <div class="col-md-6"><strong>Dernier remplacement</strong></div>
                 <div class="col-md-6">{{ cartouche.lastChangeDate|date('d/m/Y') }}</div>
 
@@ -43,7 +45,6 @@
             Vous pouvez en acheter ici par exemple (avec ces liens sponsorisés amazon, vous participez au financement de ce merveilleux service) :
             {{ include('CartoucheCartoucheBundle:Cartouche:links.html.twig') }}
         </p>
-
     </div>
 
 {% endblock %}
