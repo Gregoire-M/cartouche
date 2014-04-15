@@ -21,6 +21,7 @@ class SendNotificationCommand extends ContainerAwareCommand
         $manager = $this->getContainer()->get('doctrine.orm.entity_manager');
         $mailer = $this->getContainer()->get('mailer');
         $twigEnvironment = $this->getContainer()->get('twig');
+        $counter = 0;
 
         foreach ($manager->getRepository('CartoucheCartoucheBundle:Cartouche')->getCartoucheToNotify() as $cartouche) {
             /** @var \Cartouche\CartoucheBundle\Entity\Cartouche $cartouche */
@@ -39,6 +40,7 @@ class SendNotificationCommand extends ContainerAwareCommand
 
             if ($mailer->send($message)) {
                 $cartouche->setNotificationSent(true);
+                $counter++;
             }
         }
 
@@ -48,6 +50,6 @@ class SendNotificationCommand extends ContainerAwareCommand
         $transport = $this->getContainer()->get('swiftmailer.transport.real');
         $spool->flushQueue($transport);
 
-        $output->writeln('Done.');
+        $output->writeln(sprintf('%d notification(s) sent', $counter));
     }
 }
