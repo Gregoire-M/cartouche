@@ -10,7 +10,7 @@ class CartoucheRepository extends EntityRepository
     {
         return $this->createQueryBuilder('c')
             ->where('c.notificationEnabled = 1')
-            ->andWhere('c.nextChangeDate < CURRENT_DATE()')
+            ->andWhere('c.nextChangeDate <= CURRENT_DATE()')
             ->andWhere('c.notificationSent = 0')
             ->getQuery()
             ->execute();
