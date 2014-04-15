@@ -21,7 +21,11 @@
 
             {% block masthead %}
                 <div class="masthead">
-                    <h3 class="text-muted">{% block masthead_title %}Est-ce que je dois changer ma cartouche Brita ?{% endblock %}</h3>
+                    <h3 class="text-muted">
+                        {% block masthead_title %}
+                            <a href="{{ path('homepage') }}">Est-ce que je dois changer ma cartouche Brita ?</a>
+                        {% endblock %}
+                    </h3>
                 </div>
             {% endblock %}
 
