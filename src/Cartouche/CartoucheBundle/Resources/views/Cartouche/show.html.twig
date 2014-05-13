@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="pull-right">
+    <div class="pull-right" id="params">
         <a href="{{ path('cartouche_edit', {'url': cartouche.url}) }}" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> Paramètres</a>
     </div>
 
@@ -10,7 +10,7 @@
         <h1>{{ answer(cartouche.wear) }}</h1>
 
         <div class="lead">
-            <div class="row top_buffer">
+            <div class="row top_buffer" id="cartouche-infos">
                 <h2>Votre carafe "{{ cartouche.name }}"</h2>
 
                 <div class="col-md-6"><strong>Dernier remplacement</strong></div>
@@ -41,10 +41,54 @@
     <div class="row">
         <h2>Plus de cartouche Brita ?</h2>
 
-        <p>
-            Vous pouvez en acheter ici par exemple (avec ces liens sponsorisés amazon, vous participez au financement de ce merveilleux service) :
-            {{ include('CartoucheCartoucheBundle:Cartouche:links.html.twig') }}
-        </p>
+        <p>Vous pouvez en acheter ici par exemple (avec ces liens sponsorisés amazon, vous participez au financement de ce merveilleux service) :</p>
+        {{ include('CartoucheCartoucheBundle:Cartouche:links.html.twig') }}
+
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var tour;
+
+            tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-arrows',
+                    scrollTo: false,
+                    showCancelLink: true
+                }
+            });
+
+            tour.addStep('infos-step', {
+                text: 'Cette partie vous présente les informations concernant votre carafe,<br />avec notamment son niveau d\'usure',
+                attachTo: '#cartouche-infos top',
+                classes: 'shepherd shepherd-open shepherd-theme-arrows',
+                buttons: [
+                    {
+                        text: 'Suivant',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep('params-step', {
+                text: 'Ce bouton vous permet d\'éditer les paramètres de votre carages,<br />et notamment d\'activer la notification par email',
+                attachTo: '#params left',
+                classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
+                buttons: [
+                    {
+                        text: 'Terminer',
+                        action: tour.hide
+                    }
+                ]
+            });
+
+            tour.start();
+        });
+
+    </script>
 {% endblock %}
